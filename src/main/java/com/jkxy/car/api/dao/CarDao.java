@@ -28,4 +28,10 @@ public interface CarDao {
 
     @Update("update carMessage set count=#{count} where id = #{id}")
     void updateCount(Car car);
+
+    @Select("select * from carMessage where carName like concat('%',#{carName},'%') limit #{current} , #{size}")
+    List<Car> listByCarName(String carName, int current, int size);
+
+    @Select("select count(1) from carMessage where carName like concat('%',#{carName},'%')")
+    Long countByCarName(String carName);
 }
